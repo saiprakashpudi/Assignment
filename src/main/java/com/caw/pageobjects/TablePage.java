@@ -1,21 +1,20 @@
 package com.caw.pageobjects;
 
-import com.caw.pojos.TableData;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.caw.reportmanager.Report;
+import com.caw.utility.ScreenShot;
 import com.caw.utility.SeleniumActions;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.logging.Logs;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TablePage {
 
-    private static final Logger Log = LogManager.getLogger(TablePage.class);
+    private static final Logger Log = Logger.getLogger(TablePage.class);
 
     private final WebDriver driver;
 
@@ -46,10 +45,12 @@ public class TablePage {
         Log.info("Click on refresh table button");
         SeleniumActions.clickElement(REFRESH_TABLE_BTN,driver,2);
         Report.getTest().info("Click on refresh table button");
+        Report.getTest().info(MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenShot.addScreenshot(driver)).build());
         return this;
     }
 
     public List<List<String>> fetchTableData(){
+        Log.info("Fetching data from web page");
         List<List<String>> tabledata = new ArrayList<>();
         List<WebElement> element = driver.findElements(DYNAMIC_TABLE_ROWS);
         element.stream().skip(1).forEach(ele -> {

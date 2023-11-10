@@ -2,8 +2,7 @@ package com.caw.drivermanager;
 
 import com.caw.enums.BrowserType;
 import com.caw.exceptions.CustomRunTimeException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
@@ -13,7 +12,7 @@ import java.util.Objects;
 
 public class DriverFactory {
 
-    private static Logger LOG = LogManager.getLogger(DriverFactory.class);
+    private static Logger LOG = Logger.getLogger(DriverFactory.class);
     private static final Map<BrowserType, Supplier<WebDriver>> MAP = new EnumMap<>(BrowserType.class);
     private static final Supplier<WebDriver> CHROME = com.caw.drivermanager.ChromeBrowser::getDriver;
 
@@ -21,6 +20,7 @@ public class DriverFactory {
         MAP.put(BrowserType.CHROME, CHROME);
     }
 
+    //fetch required browser
     public static WebDriver getDriver(BrowserType browserType){
         if(Objects.isNull(browserType)){
             throw new CustomRunTimeException("please check browser type");

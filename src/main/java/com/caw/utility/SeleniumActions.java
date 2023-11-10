@@ -1,15 +1,13 @@
 package com.caw.utility;
 
-import com.caw.configuration.Config;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class SeleniumActions {
 
-    private static final Logger Log = LogManager.getLogger(SeleniumActions.class);
+    private static final Logger Log = Logger.getLogger(SeleniumActions.class);
 
     private SeleniumActions(){
 

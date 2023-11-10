@@ -2,15 +2,14 @@ package com.caw.drivermanager;
 
 import com.caw.configuration.Config;
 import com.caw.enums.BrowserType;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Objects;
 
 public class Driver {
 
-    private static final Logger Log = LogManager.getLogger(Driver.class);
+    private static final Logger Log = Logger.getLogger(Driver.class);
 
     private static ThreadLocal<WebDriver> dr =new ThreadLocal<>();
 
