@@ -11,7 +11,7 @@ import java.util.Map;
 public class Utility {
 
     @SneakyThrows
-    public List<List<String>> convertLisOfMapsToListOfLists(String inputData) {
+    public List<List<String>> convertJsonStringToListOfLists(String inputData) {
         // Convert JSON array to List of Maps
         List<Map<String, Object>> listOfMaps = new ObjectMapper()
                 .readValue(inputData, new TypeReference<List<Map<String, Object>>>() {});

@@ -50,7 +50,7 @@ public class Tests {
                 .clickRefreshTableButton()
                 .fetchTableData();
         //assert actual and expected
-        List<List<String>> expectedTable = new Utility().convertLisOfMapsToListOfLists(inputData);
+        List<List<String>> expectedTable = new Utility().convertJsonStringToListOfLists(inputData);
         Assertions.assertThat(actualTable)
                 .containsExactlyInAnyOrderElementsOf(expectedTable);
         Report.getTest().pass(MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenShot.addScreenshot(driver),
