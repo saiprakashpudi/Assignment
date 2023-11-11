@@ -14,10 +14,8 @@ import lombok.SneakyThrows;
 import org.apache.log4j.PropertyConfigurator;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -40,16 +38,12 @@ public class Tests {
     }
 
     @SneakyThrows
-    @Test
-    public void validateTable(){
-        String inputData = "[{\"name\" : \"Bob\", \"age\" : 20, \"gender\": \"male\"}, {\"name\": \"George\", \"age\" : 42, \"gender\": \"male\"}, {\"name\":\n" +
-                "\"Sara\", \"age\" : 42, \"gender\": \"female\"}, {\"name\": \"Conor\", \"age\" : 40, \"gender\": \"male\"}, {\"name\":\n" +
-                "\"Jennifer\", \"age\" : 42, \"gender\": \"female\"}]\n";
-
+    @Test(dataProvider = "testData")
+    public void validateTable(String inputData){
         WebDriver driver = Driver.getDriver();
         //launch url
         SeleniumActions.launchURL(driver,BASE_URL);
-
+        //page actions
         List<List<String>> actualTable = new TablePage(driver)
                 .clickOnSummaryButton()
                 .enterJsonData(inputData)
@@ -63,6 +57,14 @@ public class Tests {
                 MarkupHelper.createLabel("Test Passed Successfully", ExtentColor.GREEN).getMarkup()).build());
     }
 
+    @DataProvider
+    public Object[] testData(){
+        String inputData = "[{\"name\" : \"Bob\", \"age\" : 20, \"gender\": \"male\"}, {\"name\": \"George\", \"age\" : 42, \"gender\": \"male\"}, {\"name\":\n" +
+                "\"Sara\", \"age\" : 42, \"gender\": \"female\"}, {\"name\": \"Conor\", \"age\" : 40, \"gender\": \"male\"}, {\"name\":\n" +
+                "\"Jennifer\", \"age\" : 42, \"gender\": \"female\"}]\n";
+
+        return new Object[]{inputData};
+    }
 
     @AfterMethod(alwaysRun = true)
     public void tearDownBrowser(){
